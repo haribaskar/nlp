@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 from nltk.stem.snowball import SnowballStemmer
 from nltk.corpus import stopwords
-
+import string
 def clean_html(html):
     """
     Copied from NLTK package.
@@ -83,3 +83,34 @@ def review_to_sentences( review, tokenizer, remove_stopwords=False ):
     # Return the list of sentences (each sentence is a list of words,
     # so this returns a list of lists
     return sentences
+
+
+# line = remove_new_line(line)
+# line = remove_punctuation(line)
+# line = replace_tab_with(line, " ")
+# line = remove_duplicate_spaces(line)
+# line = convert_to_lowercase(line)
+# line = replace_numbers_with(line, "\"NUM\"")
+
+def remove_punctuation(line):
+    exclude = set(string.punctuation)
+    return ''.join(ch for ch in line if ch not in exclude)
+
+
+def replace_tab_with(line, character):
+    return line.replace('\t', character)
+
+
+def remove_duplicate_spaces(line):
+    return line.replace("  ", " ")
+
+
+def convert_to_lowercase(line):
+    return line.lower()
+
+
+def replace_numbers_with(line, character):
+    return re.sub(r'[0-9]+', character, line)
+
+def remove_new_line(line):
+    return line.replace("\n", "")
